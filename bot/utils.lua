@@ -13,7 +13,11 @@ http.TIMEOUT = 10
 
 function get_receiver(msg)
   if msg.to.type == 'user' then
-    return 'user#id'..msg.from.id
+    if msg.from.id == our_id then
+      return 'user#id'..msg.to.id
+    else
+      return 'user#id'..msg.from.id
+    end
   end
   if msg.to.type == 'chat' then
     return 'chat#id'..msg.to.id
